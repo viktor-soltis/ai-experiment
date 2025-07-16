@@ -25,6 +25,66 @@
             margin: 0 auto;
         }
 
+        .font-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+            border: 1px solid #e0e0e0;
+        }
+
+        .font-control label {
+            font-weight: 600;
+            color: #333;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+
+        .font-control input[type="range"] {
+            width: 100px;
+            height: 6px;
+            border-radius: 3px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .font-control input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #4caf50;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .font-control input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #4caf50;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .font-control span {
+            font-weight: 600;
+            color: #4caf50;
+            font-size: 14px;
+            min-width: 35px;
+        }
+
         .header {
             text-align: center;
             margin-bottom: 60px;
@@ -172,7 +232,7 @@
             color: #856404;
             display: block;
             margin-bottom: 10px;
-            font-size: 1.1em;
+            font-size: 1.2em;
         }
 
         .resource-card a {
@@ -231,6 +291,21 @@
         }
 
         @media (max-width: 768px) {
+            .font-control {
+                position: fixed;
+                top: 10px;
+                right: 10px;
+                left: 10px;
+                padding: 12px 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+            }
+
+            .font-control input[type="range"] {
+                width: 80px;
+            }
+
             .requirements-grid {
                 grid-template-columns: 1fr;
                 gap: 30px;
@@ -243,6 +318,7 @@
             
             .header h1 {
                 font-size: 2em;
+                margin-top: 60px;
             }
             
             .task-section {
@@ -258,7 +334,7 @@
             }
 
             .data-table {
-                font-size: 1em;
+                font-size: 1.1em;
             }
             
             .data-table th,
@@ -270,6 +346,13 @@
 </head>
 <body>
     <div class="container">
+        <!-- Font Size Control -->
+        <div class="font-control">
+            <label for="fontSizeSlider">Размер шрифта:</label>
+            <input type="range" id="fontSizeSlider" min="14" max="28" value="20" step="1">
+            <span id="fontSizeValue">20px</span>
+        </div>
+
         <div class="header">
             <h1>Микро-хакатон</h1>
             <p>Создайте каталог путешествий за 1 час, используя AI-инструменты для написания кода</p>
@@ -393,5 +476,30 @@
             Удачи в создании каталога! 🚀
         </div>
     </div>
+
+    <script>
+        // Font size control
+        const fontSizeSlider = document.getElementById('fontSizeSlider');
+        const fontSizeValue = document.getElementById('fontSizeValue');
+        const body = document.body;
+
+        // Load saved font size from localStorage
+        const savedFontSize = localStorage.getItem('fontSizePref');
+        if (savedFontSize) {
+            fontSizeSlider.value = savedFontSize;
+            body.style.fontSize = savedFontSize + 'px';
+            fontSizeValue.textContent = savedFontSize + 'px';
+        }
+
+        // Handle slider changes
+        fontSizeSlider.addEventListener('input', function() {
+            const fontSize = this.value;
+            body.style.fontSize = fontSize + 'px';
+            fontSizeValue.textContent = fontSize + 'px';
+            
+            // Save preference to localStorage
+            localStorage.setItem('fontSizePref', fontSize);
+        });
+    </script>
 </body>
 </html>
