@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Микро-хакатон: Каталог путешествий</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.7;
+            background: #ffffff;
+            color: #333;
+            padding: 40px 20px;
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .header p {
+            font-size: 1.3em;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 80px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section h2 {
+            font-size: 2em;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .section-description {
+            color: #666;
+            font-size: 1.3em;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .conditions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .condition-card {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .condition-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #e8f5e8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 24px;
+        }
+
+        .condition-card h3 {
+            font-size: 1.3em;
+            color: #333;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .condition-card p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .task-section {
+            background: #fafafa;
+            padding: 60px 40px;
+            border-radius: 20px;
+            margin: 60px 0;
+        }
+
+        .task-title {
+            font-size: 2.2em;
+            color: #333;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 50px;
+            margin-top: 40px;
+        }
+
+        .req-section h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            font-weight: 600;
+        }
+
+        .req-list {
+            list-style: none;
+        }
+
+        .req-list li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #555;
+            font-size: 1.1em;
+        }
+
+        .req-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #4caf50;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .additional-list li::before {
+            content: '+';
+            color: #2196f3;
+        }
+
+        .resource-card {
+            background: #fff3cd;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .resource-card strong {
+            color: #856404;
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .resource-card a {
+            color: #856404;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.2em;
+        }
+
+        .resource-card a:hover {
+            text-decoration: underline;
+        }
+
+        .data-section {
+            margin-top: 60px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+        }
+
+        .data-table th {
+            background: #f8f9fa;
+            color: #333;
+            padding: 20px 15px;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .data-table td {
+            padding: 20px 15px;
+            border-bottom: 1px solid #f1f3f4;
+            color: #555;
+        }
+
+        .data-table tr:hover {
+            background: #f8f9fa;
+            transition: background 0.2s ease;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+            font-size: 1.2em;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .requirements-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .conditions-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .task-section {
+                padding: 40px 20px;
+            }
+            
+            .section h2 {
+                font-size: 1.6em;
+            }
+            
+            .task-title {
+                font-size: 1.8em;
+            }
+
+            .data-table {
+                font-size: 1em;
+            }
+            
+            .data-table th,
+            .data-table td {
+                padding: 12px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Микро-хакатон</h1>
+            <p>Создайте каталог путешествий за 1 час, используя AI-инструменты для написания кода</p>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <h2>Условия проведения</h2>
+                <p class="section-description">Основные параметры и ресурсы для участия в эксперименте</p>
+            </div>
+            
+            <div class="conditions-grid">
+                <div class="condition-card">
+                    <div class="condition-icon">⏱️</div>
+                    <h3>Время</h3>
+                    <p>1 час на создание полноценного веб-приложения</p>
+                </div>
+                <div class="condition-card">
+                    <div class="condition-icon">🤖</div>
+                    <h3>Инструмент</h3>
+                    <p>Kiro как основной помощник для написания кода</p>
+                </div>
+                <div class="condition-card">
+                    <div class="condition-icon">💻</div>
+                    <h3>Технологии</h3>
+                    <p>Любые веб-технологии по вашему выбору</p>
+                </div>
+            </div>
+            
+            <div class="resource-card">
+                <strong>Дополнительные ресурсы:</strong>
+                <a href="https://kiro.dev/downloads/" target="_blank">https://kiro.dev/downloads/</a>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="task-section">
+                <div class="task-title">"Создайте каталог ваших путешествий"</div>
+                
+                <div class="requirements-grid">
+                    <div class="req-section">
+                        <h3>Основные требования</h3>
+                        <ul class="req-list">
+                            <li>Веб-сайт с функциональностью каталога</li>
+                            <li>Добавление нового путешествия через форму</li>
+                            <li>Просмотр списка добавленных путешествий</li>
+                            <li>Сохранение данных между сессиями</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="req-section">
+                        <h3>Дополнительные возможности</h3>
+                        <ul class="req-list additional-list">
+                            <li>Редактирование и удаление записей</li>
+                            <li>Поиск по названию города/страны</li>
+                            <li>Фильтрация по датам, бюджету, длительности</li>
+                            <li>Добавление фотографий к путешествиям</li>
+                            <li>Рейтинг поездок (звездочки)</li>
+                            <li>Сортировка по разным критериям</li>
+                            <li>Счетчики: общий бюджет, количество стран</li>
+                            <li>Экспорт данных в файл</li>
+                            <li>Красивый дизайн и анимации</li>
+                            <li>Карта с отметками мест</li>
+                            <li>Категории поездок (отдых, работа, семья)</li>
+                            <li>Валидация форм и уведомления</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-header">
+                <h2>Стартовые данные</h2>
+                <p class="section-description">Используйте эти данные как первые записи в вашем каталоге для экономии времени</p>
+            </div>
+            
+            <div class="data-section">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Город</th>
+                            <th>Страна</th>
+                            <th>Дата</th>
+                            <th>Длительность</th>
+                            <th>Описание</th>
+                            <th>Бюджет</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Киев</td>
+                            <td>Украина</td>
+                            <td>15.05.2023</td>
+                            <td>4 дня</td>
+                            <td>Прогулки по Крещатику, золотые купола Софийского собора, вечерний Днепр. Незабываемая атмосфера древнего города.</td>
+                            <td>$400</td>
+                        </tr>
+                        <tr>
+                            <td>Варшава</td>
+                            <td>Польша</td>
+                            <td>22.08.2023</td>
+                            <td>3 дня</td>
+                            <td>Восстановленный старый город, королевский замок, отличная польская кухня. Контраст истории и современности.</td>
+                            <td>$350</td>
+                        </tr>
+                        <tr>
+                            <td>Атланта</td>
+                            <td>США</td>
+                            <td>10.01.2024</td>
+                            <td>5 дней</td>
+                            <td>Музей Coca-Cola, аквариум Georgia, южное гостеприимство. Удивительно зеленый город для такого размера.</td>
+                            <td>$800</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="footer">
+            Удачи в создании каталога! 🚀
+        </div>
+    </div>
+</body>
+</html>
