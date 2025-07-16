@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подготовка к микро-хакатону</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: 20px;
+            line-height: 1.7;
+            background: #ffffff;
+            color: #333;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .section {
+            margin-bottom: 40px;
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 6px solid #667eea;
+        }
+
+        .section h2 {
+            color: #333;
+            font-size: 1.5em;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section h2::before {
+            content: '✅';
+            font-size: 1.2em;
+            margin-right: 15px;
+        }
+
+        .checklist {
+            list-style: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            background: white;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border: 2px solid #e0e0e0;
+            position: relative;
+            padding-left: 60px;
+        }
+
+        .checklist li::before {
+            content: '☐';
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            font-size: 1.8em;
+            color: #667eea;
+            cursor: pointer;
+        }
+
+        .checklist li.checked::before {
+            content: '✅';
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 15px;
+            font-size: 0.9em;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+
+        .task-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .task-description {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .warning {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+        }
+
+        .warning::before {
+            content: '⚠️ ';
+            font-size: 1.3em;
+            margin-right: 10px;
+        }
+
+        .success {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 25px 0;
+            text-align: center;
+        }
+
+        .success::before {
+            content: '🎯 ';
+            font-size: 1.5em;
+            margin-right: 10px;
+        }
+
+        .timing {
+            background: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 5px;
+        }
+
+        .timing::before {
+            content: '⏰ ';
+            font-size: 1.3em;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        .links {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+            margin: 20px 0;
+        }
+
+        .links h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .links a {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            display: block;
+            margin: 8px 0;
+        }
+
+        .links a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+                font-size: 18px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .checklist li {
+                padding: 15px;
+                padding-left: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Подготовка к микро-хакатону</h1>
+            <p>Чек-лист того, что нужно сделать до старта</p>
+        </div>
+
+        <div class="timing">
+            <strong>Время на подготовку:</strong> ~20-30 минут до начала эксперимента
+        </div>
+
+        <div class="section">
+            <h2>Установка и настройка</h2>
+            <ul class="checklist">
+                <li>
+                    <span class="step-number">1</span>
+                    <div class="task-title">Скачать и установить Kiro IDE</div>
+                    <div class="task-description">Перейти на официальный сайт, скачать версию для вашей операционной системы, установить программу</div>
+                </li>
+                <li>
+                    <span class="step-number">2</span>
+                    <div class="task-title">Создать аккаунт или авторизоваться</div>
+                    <div class="task-description">Войти через Gmail, GitHub или создать новый аккаунт. Проверить что авторизация прошла успешно</div>
+                </li>
+                <li>
+                    <span class="step-number">3</span>
+                    <div class="task-title">Проверить работу Kiro</div>
+                    <div class="task-description">Написать простой тестовый запрос типа "Привет, можешь создать простой HTML файл?" чтобы убедиться что всё работает</div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Подготовка рабочего места</h2>
+            <ul class="checklist">
+                <li>
+                    <span class="step-number">4</span>
+                    <div class="task-title">Создать рабочую папку</div>
+                    <div class="task-description">На рабочем столе или в удобном месте создать папку для проекта, например "Hackathon" или "Travel_Catalog"</div>
+                </li>
+                <li>
+                    <span class="step-number">5</span>
+                    <div class="task-title">Открыть рабочую папку в Kiro</div>
+                    <div class="task-description">В Kiro открыть созданную папку как рабочий проект (File → Open Folder или аналогично)</div>
+                </li>
+                <li>
+                    <span class="step-number">6</span>
+                    <div class="task-title">Подготовить браузер</div>
+                    <div class="task-description">Убедиться что есть рабочий браузер (Chrome, Firefox, Safari), закрыть лишние вкладки</div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Техническая подготовка</h2>
+            <ul class="checklist">
+                <li>
+                    <span class="step-number">7</span>
+                    <div class="task-title">Настроить запись экрана</div>
+                    <div class="task-description">Установить и настроить программу записи экрана (OBS, встроенные средства ОС) для фиксации процесса работы</div>
+                </li>
+                <li>
+                    <span class="step-number">8</span>
+                    <div class="task-title">Проверить микрофон (опционально)</div>
+                    <div class="task-description">Если планируется запись голосовых комментариев, проверить работу микрофона</div>
+                </li>
+                <li>
+                    <span class="step-number">9</span>
+                    <div class="task-title">Закрыть лишние программы</div>
+                    <div class="task-description">Выйти из мессенджеров, закрыть ненужные приложения чтобы ничего не отвлекало</div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Финальная проверка</h2>
+            <ul class="checklist">
+                <li>
+                    <span class="step-number">10</span>
+                    <div class="task-title">Открыть техническое задание</div>
+                    <div class="task-description">В браузере открыть страницу с заданием и стартовыми данными</div>
+                </li>
+                <li>
+                    <span class="step-number">11</span>
+                    <div class="task-title">Открыть справочную информацию</div>
+                    <div class="task-description">В отдельной вкладке открыть чит-шит с базовой информацией о Kiro (при необходимости)</div>
+                </li>
+                <li>
+                    <span class="step-number">12</span>
+                    <div class="task-title">Подготовить засечку времени</div>
+                    <div class="task-description">Приготовить таймер или часы для отслеживания одного часа работы</div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="links">
+            <h3>🔗 Полезные ссылки:</h3>
+            <a href="https://kiro.dev/downloads/" target="_blank">Скачать Kiro IDE</a>
+            <a href="#" target="_blank">Техническое задание хакатона</a>
+            <a href="#" target="_blank">Базовая справка по Kiro</a>
+        </div>
+
+        <div class="warning">
+            <strong>Важно:</strong> Убедитесь что интернет-соединение стабильное. Kiro требует подключения к интернету для работы AI-функций.
+        </div>
+
+        <div class="success">
+            <strong>Готово к старту!</strong> Когда все пункты выполнены, можно начинать часовой эксперимент.
+        </div>
+
+        <div class="timing">
+            <strong>Напоминание:</strong> Эксперимент длится ровно 1 час с момента получения задания. Не забудьте в конце попросить Kiro остановить все серверы!
+        </div>
+    </div>
+
+    <script>
+        // Интерактивные чекбоксы
+        document.querySelectorAll('.checklist li').forEach(item => {
+            item.addEventListener('click', function() {
+                this.classList.toggle('checked');
+            });
+        });
+    </script>
+</body>
+</html>
